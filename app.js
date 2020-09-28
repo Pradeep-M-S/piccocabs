@@ -1,12 +1,12 @@
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyB6Izsku_qLcnr9lc0Ivj5eejB7-5FCaRE",
-  authDomain: "test-form-d3492.firebaseapp.com",
-  databaseURL: "https://test-form-d3492.firebaseio.com",
-  projectId: "test-form-d3492",
-  storageBucket: "test-form-d3492.appspot.com",
-  messagingSenderId: "222398070278",
-  appId: "1:222398070278:web:bf51f5c8a26dcfff9ecd87",
+  apiKey: "AIzaSyDiW8e2qm1Kay_WAjqRcaZVEIavkTvYJGw",
+  authDomain: "test-proj-picco.firebaseapp.com",
+  databaseURL: "https://test-proj-picco.firebaseio.com",
+  projectId: "test-proj-picco",
+  storageBucket: "test-proj-picco.appspot.com",
+  messagingSenderId: "98274567879",
+  appId: "1:98274567879:web:1c5bd279301cb7daf580e2",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -29,6 +29,8 @@ function submitForm(e) {
   saveContactInfo(name, email, message);
 
   document.querySelector(".contact-form").reset();
+
+  sendEmail(name, email, message);
 }
 
 // Save infos to Firebase
@@ -40,4 +42,49 @@ function saveContactInfo(name, email, message) {
     email: email,
     message: message,
   });
+
+  retrieveInfos();
+}
+
+function retrieveInfos() {
+  let ref = firebase.database().ref("infos");
+  ref.on("value", gotData);
+}
+
+//retrieve infos
+function gotData(data) {
+  let info = data.val();
+  let keys = Object.keys(info);
+
+  for (let i = 0; i < keys.length; i++) {
+    let infoData = keys[i];
+    let name = info[infoData].name;
+    let email = info[infoData].email;
+    let message = info[infoData].message;
+    console.log(name, email, message);
+
+    let infosResults = document.querySelector(".infosResults");
+
+    infoResults.inneHTML += `<div>
+    <p><strong>${name}</strong></p>
+    <p><strong>${email}</strong></p>
+    <p><strong>${message}</strong></p>
+    </div>`;
+  }
+}
+
+retrieveInfos();
+
+//send email info to our email
+
+function sendEmail(name, email, message) {
+  Email.send({
+    Host: "smtp.gmail.com",
+    Username: "pradeepmsblogspot@gmail.com",
+    Password: "ibxdnieqkadegcua",
+    From: "pradeepmsblogspot@gmail.com",
+    To: "pradeepms200076@gmail.com",
+    Subject: `${name} Sent you a message`,
+    Body: `Name : ${name} <br/>  Email : ${email}  <br/>  Message : ${message}`,
+  }).then((message) => alert("Mail Sent Successfully"));
 }

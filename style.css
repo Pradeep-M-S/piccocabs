@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -5,30 +6,37 @@
 }
 
 body {
-  font-family: inter;
+  font-family: "Inter", sans-serif;
   font-weight: normal;
-  background: rgb(245, 245, 245);
+  background: #a7be3a;
+  font-size: 62.5%;
 }
 
 h1 {
   text-align: center;
   margin-top: 60px;
-  font-size: 35px;
+  font-size: 2rem;
+}
+h2 {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 50px;
 }
 
 p {
   text-align: center;
   margin: 15px auto 0px auto;
-  font-size: 16px;
+  font-size: 1rem;
   width: 80%;
 }
 .contact-form {
-  margin: 35px auto 0px auto;
+  margin: 35px auto 50px auto;
   width: 80%;
 }
 
 .contact-form label {
-  font-size: 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
   display: inline-block;
   margin-bottom: 10px;
 }
@@ -39,7 +47,7 @@ p {
   border: none;
   border-bottom: 2px solid #ccc;
   background: rgb(255, 255, 255);
-  font-size: 18px;
+  font-size: 1rem;
   border-radius: 3px;
   margin-bottom: 20px;
   width: 100%;
@@ -55,7 +63,7 @@ p {
   border: none;
   border-bottom: 2px solid #ccc;
   background: rgb(255, 255, 255);
-  font-size: 18px;
+  font-size: 1rem;
   border-radius: 3px;
   width: 100%;
   font-family: inter;
@@ -85,14 +93,11 @@ p {
   border-bottom: 3px solid #22b352;
 }
 
-@media all and (min-width: 1000px) {
+.bd {
+  border-radius: 10px;
+}
+@media screen and (min-width: 1000px) {
   .contact-form {
     width: 40%;
-  }
-}
-
-@media all and (min-width: 1080px) {
-  .contact-form {
-    width: 30%;
   }
 }
